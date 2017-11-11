@@ -180,7 +180,7 @@ while True:
             logging.info(leader)
             all_planets.sort(key=lambda x: ship.calculate_distance_between(x))
             #all_planets.sort(key=lambda x: x.radius)
-            if turn_count % 2 == 1 or turn_count>250:
+            if turn_count % 10 < 5:
                   ignore_ship=True
             else:
                   ignore_ship=False
