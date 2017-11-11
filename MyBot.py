@@ -65,6 +65,10 @@ def nearby_docker(myship,all_players):
             for ship in player_ships:
                 if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 10:
                     return ship
+                if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 15 and ship.health < 255:
+                    return ship
+                if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 20 and ship.health < 128:
+                    return ship
     return False
 
 turn_count=0
