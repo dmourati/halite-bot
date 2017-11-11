@@ -180,7 +180,7 @@ while True:
 #                    logging.info("PLANET OWNER")
 #                    logging.info(planet.owner.id)
                     navigate_command = ship.navigate(
-                        planet,
+                        ship.closest_point_to(planet),
                         game_map,
                         speed=int(hlt.constants.MAX_SPEED),
                         max_corrections=18,
