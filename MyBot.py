@@ -90,6 +90,7 @@ while True:
         if nearby_docker(ship,all_players):
             logging.info("NEARBY DOCKED/DOCKING SHIP")
             logging.info(ship.id)
+            my_speed=int(hlt.constants.MAX_SPEED)
             navigate_command = ship.navigate(
                 ship.closest_point_to(ship),
                 game_map,
