@@ -173,7 +173,7 @@ while True:
             logging.info("LEADER")
             logging.info(leader)
             #all_planets.sort(key=lambda x: ship.calculate_distance_between(x))
-            all_planets.sort(key=lambda x: x.radius, reverse=True)
+            all_planets.sort(key=lambda x: x.radius)
             for planet in all_planets:
                 logging.info("WAR TIME")
                 if planet.is_owned() and planet.owner.id == leader:
