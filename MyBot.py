@@ -180,6 +180,10 @@ while True:
             logging.info(leader)
             all_planets.sort(key=lambda x: ship.calculate_distance_between(x))
             #all_planets.sort(key=lambda x: x.radius)
+            if turn % 2 == 1 or turn>250:
+                  ignore_ship=True
+            else
+                  ignore ship=False
             for planet in all_planets:
                 logging.info("WAR TIME")
                 if planet.is_owned() and planet.owner.id == leader:
@@ -191,7 +195,7 @@ while True:
                         speed=int(hlt.constants.MAX_SPEED),
                         max_corrections=18,
                         angular_step=5,
-                        ignore_ships=True,
+                        ignore_ships=ignore_ship,
                         ignore_planets=False)
                     if navigate_command:
                         command_queue.append(navigate_command)
