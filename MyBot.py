@@ -193,8 +193,8 @@ while True:
                         ship.closest_point_to(planet),
                         game_map,
                         speed=int(hlt.constants.MAX_SPEED),
-                        max_corrections=18,
-                        angular_step=5,
+                        max_corrections=90,
+                        angular_step=15,
                         ignore_ships=ignore_ship,
                         ignore_planets=False)
                     if navigate_command:
