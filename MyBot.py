@@ -56,7 +56,7 @@ def find_leader(all_planets,all_players):
 
 def nearby_docker(myship,all_players):
     """
-    Locate a nearby ship docking
+    Locate a nearby ship docked or docking
     """
     for player in all_players:
         playerid=player.id
@@ -68,6 +68,12 @@ def nearby_docker(myship,all_players):
                 if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 15 and ship.health < 255:
                     return ship
                 if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 20 and ship.health < 128:
+                    return ship
+                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 10:
+                    return ship
+                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 15 and ship.health < 255:
+                    return ship
+                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 20 and ship.health < 128:
                     return ship
     return False
 
