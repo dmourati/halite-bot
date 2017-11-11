@@ -182,7 +182,7 @@ while True:
             #all_planets.sort(key=lambda x: x.radius)
             if turn % 2 == 1 or turn>250:
                   ignore_ship=True
-            else
+            else:
                   ignore ship=False
             for planet in all_planets:
                 logging.info("WAR TIME")
