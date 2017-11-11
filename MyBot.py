@@ -183,7 +183,7 @@ while True:
             if turn % 2 == 1 or turn>250:
                   ignore_ship=True
             else:
-                  ignore ship=False
+                  ignore_ship=False
             for planet in all_planets:
                 logging.info("WAR TIME")
                 if planet.is_owned() and planet.owner.id == leader:
