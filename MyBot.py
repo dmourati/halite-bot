@@ -151,20 +151,20 @@ while True:
                     # wish to turn that option off.
                     if turn_count <=4:
                         my_speed=int(hlt.constants.MAX_SPEED/2)
-                        ignore_ship=False
-                        ignore_planet=False
+                        start_ignore_ship=False
+                        start_ignore_planet=False
                     else:
                         my_speed=int(hlt.constants.MAX_SPEED)
-                        ignore_ship=False
-                        ignore_planet=False
+                        start_ignore_ship=False
+                        start_ignore_planet=False
                     navigate_command = ship.navigate(
                         ship.closest_point_to(planet),
                         game_map,
                         speed=my_speed,
                         max_corrections=18,
                         angular_step=5,
-                        ignore_ships=ignore_ship,
-                        ignore_planets=ignore_planet)
+                        ignore_ships=start_ignore_ship,
+                        ignore_planets=start_ignore_planet)
                     # If the move is possible, add it to the command_queue (if there are too many obstacles on the way
                     # or we are trapped (or we reached our destination!), navigate_command will return null;
                     # don't fret though, we can run the command again the next turn)
