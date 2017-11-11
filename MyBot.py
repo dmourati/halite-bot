@@ -191,7 +191,7 @@ while True:
                         speed=int(hlt.constants.MAX_SPEED),
                         max_corrections=18,
                         angular_step=5,
-                        ignore_ships=False,
+                        ignore_ships=True,
                         ignore_planets=False)
                     if navigate_command:
                         command_queue.append(navigate_command)
