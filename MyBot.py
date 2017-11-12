@@ -93,7 +93,7 @@ while True:
             navigate_command = ship.navigate(
                 ship.closest_point_to(ship),
                 game_map,
-                speed=my_speed,
+                speed=int(hlt.constants.MAX_SPEED/2),
                 max_corrections=18,
                 angular_step=5,
                 ignore_ships=False,
