@@ -56,7 +56,7 @@ def find_leader(all_planets,all_players):
 
 def nearby_docker(myship,all_players):
     """
-    Locate a nearby ship docked or docking
+    Locate a nearby ship docking
     """
     for player in all_players:
         playerid=player.id
@@ -64,16 +64,6 @@ def nearby_docker(myship,all_players):
         if playerid != game_map.my_id:
             for ship in player_ships:
                 if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 10:
-                    return ship
-                if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 15 and ship.health < 255:
-                    return ship
-                if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 20 and ship.health < 128:
-                    return ship
-                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 10:
-                    return ship
-                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 15 and ship.health < 255:
-                    return ship
-                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 20 and ship.health < 128:
                     return ship
     return False
 
@@ -100,7 +90,6 @@ while True:
         if nearby_docker(ship,all_players):
             logging.info("NEARBY DOCKED/DOCKING SHIP")
             logging.info(ship.id)
-            my_speed=int(hlt.constants.MAX_SPEED)
             navigate_command = ship.navigate(
                 ship.closest_point_to(ship),
                 game_map,
@@ -151,20 +140,20 @@ while True:
                     # wish to turn that option off.
                     if turn_count <=4:
                         my_speed=int(hlt.constants.MAX_SPEED/2)
-                        start_ignore_ship=False
-                        start_ignore_planet=False
+                        ignore_ship=False
+                        ignore_planet=False
                     else:
                         my_speed=int(hlt.constants.MAX_SPEED)
-                        start_ignore_ship=False
-                        start_ignore_planet=False
+                        ignore_ship=False
+                        ignore_planet=False
                     navigate_command = ship.navigate(
                         ship.closest_point_to(planet),
                         game_map,
                         speed=my_speed,
                         max_corrections=18,
                         angular_step=5,
-                        ignore_ships=start_ignore_ship,
-                        ignore_planets=start_ignore_planet)
+                        ignore_ships=ignore_ship,
+                        ignore_planets=ignore_planet)
                     # If the move is possible, add it to the command_queue (if there are too many obstacles on the way
                     # or we are trapped (or we reached our destination!), navigate_command will return null;
                     # don't fret though, we can run the command again the next turn)
@@ -178,24 +167,20 @@ while True:
             leader=find_leader(all_planets,all_players)
             logging.info("LEADER")
             logging.info(leader)
-            all_planets.sort(key=lambda x: ship.calculate_distance_between(x))
-            #all_planets.sort(key=lambda x: x.radius)
-            if turn_count > 100 and turn_count % 10 < 5:
-                  ignore_ship=True
-            else:
-                  ignore_ship=False
+            #all_planets.sort(key=lambda x: ship.calculate_distance_between(x))
+            all_planets.sort(key=lambda x: x.radius, reverse=True)
             for planet in all_planets:
                 logging.info("WAR TIME")
                 if planet.is_owned() and planet.owner.id == leader:
 #                    logging.info("PLANET OWNER")
 #                    logging.info(planet.owner.id)
                     navigate_command = ship.navigate(
-                        ship.closest_point_to(planet),
+                        planet,
                         game_map,
                         speed=int(hlt.constants.MAX_SPEED),
-                        max_corrections=90,
-                        angular_step=15,
-                        ignore_ships=ignore_ship,
+                        max_corrections=18,
+                        angular_step=5,
+                        ignore_ships=True,
                         ignore_planets=False)
                     if navigate_command:
                         command_queue.append(navigate_command)
