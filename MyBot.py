@@ -61,9 +61,12 @@ def nearby_docker(myship,all_players):
     for player in all_players:
         playerid=player.id
         player_ships=player.all_ships()
+        player_ships.sort(key=lambda x: myship.calculate_distance_between(x))
         if playerid != game_map.my_id:
             for ship in player_ships:
-                if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 10:
+                if (ship.docking_status == ship.DockingStatus.DOCKING):
+                    return ship
+                if (ship.docking_status == ship.DockingStatus.DOCKED):
                     return ship
     return False
 
