@@ -78,7 +78,6 @@ while True:
     # TURN START
     # Update the map for the new turn and get the latest version
     game_map = game.update_map()
-
     # Here we define the set of commands to be sent to the Halite engine at the end of the turn
     command_queue = []
     # For every ship that I control
@@ -108,7 +107,6 @@ while True:
         if ship.docking_status != ship.DockingStatus.UNDOCKED or time.time()>end_time :
             # Skip this ship
             continue
-
         # For each planet in the game (only non-destroyed planets are included)
         all_planets=game_map.all_planets()
         # all_planets.sort(key=lambda x: x.radius, reverse=True)
@@ -121,7 +119,6 @@ while True:
                     #logging.info("PLANET OWNER")
                     #logging.info(planet.owner.id)
                     continue
-
                 # If we can dock, let's (try to) dock. If two ships try to dock at once, neither will be able to.
                 if ship.can_dock(planet):
                     # We add the command by appending it to the command_queue
@@ -190,7 +187,6 @@ while True:
                 else:
                     continue
                 break
-
     # Send our set of commands to the Halite engine for this turn
     game.send_command_queue(command_queue)
     # TURN END
