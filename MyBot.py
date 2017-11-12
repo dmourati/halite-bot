@@ -66,8 +66,6 @@ def nearby_docker(myship,all_players):
             for ship in player_ships:
                 if (ship.docking_status == ship.DockingStatus.DOCKING) and myship.calculate_distance_between(ship) <= 10:
                     return ship
-                if (ship.docking_status == ship.DockingStatus.DOCKED) and myship.calculate_distance_between(ship) <= 10:
-                    return ship
     return False
 
 turn_count=0
@@ -96,7 +94,7 @@ while True:
             navigate_command = ship.navigate(
                 ship.closest_point_to(ship),
                 game_map,
-                speed=int(hlt.constants.MAX_SPEED/2),
+                speed=int(hlt.constants.MAX_SPEED),
                 max_corrections=18,
                 angular_step=5,
                 ignore_ships=False,
